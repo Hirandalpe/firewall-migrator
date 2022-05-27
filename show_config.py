@@ -18,14 +18,15 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 class Rule : 
-    def __init__(self, type, protocol, source, sport, destination, dport, gateway, description) :
+    def __init__(self, type, ipprotocol, source, sport, destination, dport, gateway, protocol, description) :
         self.type = type
-        self.protocol = protocol
+        self.ipprotocol = ipprotocol
         self.source = source
         self.sport = sport
         self.destination = destination
         self.dport = dport
         self.gateway = gateway
+        self.protocol = protocol
         self.description = description
 
 def AddRule():
@@ -40,12 +41,13 @@ def AddRule():
     else:
         print("\n!! Please enter P or D ::")
         AddRule()
-    protocol = input("Protocol    >> ")
-    source = input("Source      >> ")
-    sport = input("Source Port >> ")
+    ipprotocol =  input("ipProtocol  >> ")
+    source =      input("Source      >> ")
+    sport =       input("Source Port >> ")
     destination = input("Destination >> ")
-    dport = input("Destination Port >> ")
-    gateway = input("Gateway          >> ")
+    dport =       input("Destination Port >> ")
+    gateway =     input("Gateway          >> ")
+    protocol =    input("Protocol         >> ")
     description = input("Description      >> ")
 
     print("------------------------------------------------------------------------------------------------------------------------------------------------")
@@ -56,7 +58,7 @@ def AddRule():
     print(' |(', '1', ')\t| ', rtype, ' | ', filBlanks(protocol,8), ' | ', filBlanks(source,15), ' | ',  filBlanks(sport,5), ' | ', filBlanks(destination,15), ' | ', filBlanks(dport,5), ' | ', filBlanks(gateway,15), ' | ', description)
     print("------------------------------------------------------------------------------------------------------------------------------------------------")
 
-    rule = Rule(rtype, protocol, source, sport, destination, dport, gateway, description)
+    rule = Rule(rtype, ipprotocol, source, sport, destination, dport, gateway, description)
     rules.append(rule)
     GetUserAction()
 
@@ -77,6 +79,9 @@ def GenerateRuleString(rule):
     
     # rule type
     ruleString += "\t\t<type>" + rule.type + "</type>\n"
+    ruleString += "\t\t<ipprotocol>" + rule.ipprotocol + "</ipprotocol>\n"
+    ruleString += "\t\t<descr><![CDATA[" + rule.description + "]]></descr>\n"
+    ruleString += "\t\t<interface>" + "lan" + "</interface>\n"
     
     
     ruleString += "\t</rule>\n"
@@ -145,8 +150,8 @@ class showrules(tk.Tk) :
         print("------------------------------------------------------------------------------------------------------------------------------------------------")
         for r in data:
             
-            rule = [str(r.type), str(r.protocol), str(r.source), str(r.sport), str(r.destination), str(r.dport), 
-               str(r.gateway), str(r.description)]
+            rule = [str(r.type), str(r.ipprotocol), str(r.source), str(r.sport), str(r.destination), str(r.dport), 
+               str(r.gateway), str(r.protocol), str(r.description)]
             temp_rules.append(rule)
             rtype = r.type
             protocol = filBlanks(r.protocol, 8)
@@ -185,7 +190,7 @@ rules_string = config_string[filter_start_index:filter_end_index]
 mytree = ET.fromstring(rules_string)
 def printDetected(rule_array): 
     for r in rule_array:
-        print("Rule", r.protocol, r.description)
+        print("Rule", r.ipprotocol, r.description)
   
 def fill_text(text_to_be_checked):
     return text_to_be_checked
@@ -197,7 +202,7 @@ myroot = ET.fromstring(rules_string)
 #printing myroot
 for rule in myroot:
     #print("--------------------------------")
-    new_rule = Rule("-", "-", "-", "-", "-", "-", "-", "-")
+    new_rule = Rule("-", "-", "-", "-", "-", "-", "-", "-", "-")
     for xml_tag in rule:
         tag = ""
         text = ""
@@ -208,6 +213,8 @@ for rule in myroot:
             if tag == "type":
                 new_rule.type = fill_text(text)
             if "ipprotocol" in tag:
+                new_rule.ipprotocol = fill_text(text)
+            if "protocol" in tag:
                 new_rule.protocol = fill_text(text)
             if "source" in tag:
                 for y in xml_tag:
