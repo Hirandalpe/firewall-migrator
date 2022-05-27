@@ -92,10 +92,28 @@ def GenerateRuleString(rule):
     ruleString += "\t\t<source>\n"
     if rule.source == "lan" or rule.source == "wan":
         ruleString += "\t\t\t<network>" + rule.source + "</network>\n"
+    elif rule.source == "any":
+        ruleString += "\t\t\t<any></any>\n"     
     else :
         ruleString += "\t\t\t<address>" + rule.source + "</address>\n"
         
+    if rule.sport != "" and rule.sport != "-":
+        ruleString += "\t\t\t<port>" + rule.sport + "</port>\n"
+        
     ruleString += "\t\t</source>\n"
+    
+    ruleString += "\t\t<destination>\n"
+    if rule.destination == "lan" or rule.destination == "wan":
+        ruleString += "\t\t\t<network>" + rule.destination + "</network>\n"
+    elif rule.destination == "any":
+        ruleString += "\t\t\t<any></any>\n"        
+    else :
+        ruleString += "\t\t\t<address>" + rule.destination + "</address>\n"
+        
+    if rule.dport != "" and rule.dport != "-":
+        ruleString += "\t\t\t<port>" + rule.dport + "</port>\n"
+        
+    ruleString += "\t\t</destination>\n"
     
     
     ruleString += "\t</rule>\n"
