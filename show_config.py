@@ -41,13 +41,13 @@ def AddRule():
     else:
         print("\n!! Please enter P or D ::")
         AddRule()
-    protocol =    input("Protocol         >> ")
+    protocol =    input("Protocol    >> ")
     source =      input("Source      >> ")
     sport =       input("Source Port >> ")
     destination = input("Destination >> ")
     dport =       input("Destination Port >> ")
     gateway =     input("Gateway          >> ")
-    ipprotocol =  input("ipProtocol  >> ")
+    ipprotocol =  input("ipProtocol       >> ")
     description = input("Description      >> ")
 
     print("------------------------------------------------------------------------------------------------------------------------------------------------")
