@@ -83,7 +83,9 @@ def GenerateRuleString(rule):
     ruleString += "\t\t<descr><![CDATA[" + rule.description + "]]></descr>\n"
     ruleString += "\t\t<interface>" + "lan" + "</interface>\n"
     
-    if r.protocol != "" or r.protocol != "-":
+    print(r.protocol)
+    
+    if r.protocol != "" and r.protocol != "-":
         ruleString += "\t\t<protocol>" + r.protocol + "</protocol>\n"
         
     
