@@ -74,8 +74,8 @@ def DeleteRule():
 def ContinueToImport():
     print("Generating the XML File")
     filterRoot = "<filter>\n"
-    ruleString = "\t<rule>"
-    ruleString += "\t</rule>"
+    ruleString = "\t<rule>\n"
+    ruleString += "\t</rule>\n"
     filterRoot += ruleString + "</filter>"
     
     print(filterRoot);
