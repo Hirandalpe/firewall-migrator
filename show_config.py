@@ -70,13 +70,30 @@ def DeleteRule():
     else:
         print("Please enter a valid Rule Number")
         GetUserAction()
+        
+def GenerateRuleString(rule):
+    #setting up the string base
+    ruleString = "\t<rule>\n"
+    
+    # rule type
+    ruleString += "\t\t<type>" + rule.type + "</type>\n"
+    
+    
+    ruleString += "\t</rule>\n"
+    
+    return rules_string
 
 def ContinueToImport():
     print("Generating the XML File")
+    # Setting up the Root
     filterRoot = "<filter>\n"
-    ruleString = "\t<rule>\n"
-    ruleString += "\t</rule>\n"
-    filterRoot += ruleString + "</filter>"
+    
+    rulles_string = ""
+    for r in rules :
+        rules_string += GenerateRuleString(r)
+    
+    
+    filterRoot += rules_string + "</filter>"
     
     print(filterRoot);
     
