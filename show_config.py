@@ -41,13 +41,13 @@ def AddRule():
     else:
         print("\n!! Please enter P or D ::")
         AddRule()
-    ipprotocol =  input("ipProtocol  >> ")
+    protocol =    input("Protocol         >> ")
     source =      input("Source      >> ")
     sport =       input("Source Port >> ")
     destination = input("Destination >> ")
     dport =       input("Destination Port >> ")
     gateway =     input("Gateway          >> ")
-    protocol =    input("Protocol         >> ")
+    ipprotocol =  input("ipProtocol  >> ")
     description = input("Description      >> ")
 
     print("------------------------------------------------------------------------------------------------------------------------------------------------")
@@ -58,7 +58,7 @@ def AddRule():
     print(' |(', '1', ')\t| ', rtype, ' | ', filBlanks(protocol,8), ' | ', filBlanks(source,15), ' | ',  filBlanks(sport,5), ' | ', filBlanks(destination,15), ' | ', filBlanks(dport,5), ' | ', filBlanks(gateway,15), ' | ', description)
     print("------------------------------------------------------------------------------------------------------------------------------------------------")
 
-    rule = Rule(rtype, ipprotocol, source, sport, destination, dport, gateway, description)
+    rule = Rule(rtype, ipprotocol, source, sport, destination, dport, gateway, protocol, description)
     rules.append(rule)
     GetUserAction()
 
