@@ -216,7 +216,7 @@ for rule in myroot:
                 new_rule.type = fill_text(text)
             if "ipprotocol" in tag:
                 new_rule.ipprotocol = fill_text(text)
-            if "protocol" in tag:
+            if "protocol" == tag:
                 new_rule.protocol = fill_text(text)
             if "source" in tag:
                 for y in xml_tag:
