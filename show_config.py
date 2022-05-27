@@ -88,7 +88,7 @@ def ContinueToImport():
     # Setting up the Root
     filterRoot = "<filter>\n"
     
-    rulles_string = ""
+    rules_string = ""
     for r in rules :
         rules_string += GenerateRuleString(r)
     
