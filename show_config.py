@@ -162,6 +162,8 @@ class showrules(tk.Tk) :
             gateway = filBlanks(r.gateway, 15)
             description = r.description
             
+            print(r.protocol, "::", r.ipprotocol)
+            
             print(' |(', counter, ')\t| ', rtype, ' | ', protocol, ' | ', source, ' | ',  sport, ' | ', destination, ' | ', dport, ' | ', gateway, ' | ', description)
             counter+=1 
         print("------------------------------------------------------------------------------------------------------------------------------------------------")
