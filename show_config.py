@@ -72,7 +72,14 @@ def DeleteRule():
         GetUserAction()
 
 def ContinueToImport():
-    print("doon")
+    print("Generating the XML File")
+    filterRoot = "<filter>\n"
+    ruleString = "\t<rule>"
+    ruleString += "\t</rule>"
+    filterRoot += ruleString + "</filter>"
+    
+    print(filterRoot);
+    
     GetUserAction()
 
 def SaveConfiguration():
@@ -220,7 +227,4 @@ for rule in myroot:
 
 app = showrules(rules)
 #app.mainloop()
-
-# Git change check
-
 
