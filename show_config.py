@@ -87,7 +87,15 @@ def GenerateRuleString(rule):
     
     if rule.protocol != "" and rule.protocol != "-":
         ruleString += "\t\t<protocol>" + rule.protocol + "</protocol>\n"
+    
+    
+    ruleString += "\t\t<source>"
+    if rule.source == "lan" or rule.source == "wan":
+        ruleString += "\t\t\t<network>" + rule.source + "</network>\n"
+    else :
+        ruleString += "\t\t\t<address>" + rule.source + "</address>\n"
         
+    ruleString += "\t\t</source>"
     
     
     ruleString += "\t</rule>\n"
