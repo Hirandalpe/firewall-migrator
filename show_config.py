@@ -81,19 +81,19 @@ def GenerateRuleString(rule):
     
     ruleString += "\t</rule>\n"
     
-    return rules_string
+    return ruleString
 
 def ContinueToImport():
     print("Generating the XML File")
     # Setting up the Root
     filterRoot = "<filter>\n"
     
-    rules_string = ""
+    rulesString = ""
     for r in rules :
-        rules_string += GenerateRuleString(r)
+        rulesString += GenerateRuleString(r)
     
     
-    filterRoot += rules_string + "</filter>"
+    filterRoot += rulesString + "</filter>"
     
     print(filterRoot);
     
