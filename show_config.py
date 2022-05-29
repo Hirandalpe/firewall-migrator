@@ -148,13 +148,11 @@ def SaveConfiguration(file):
 
     filter_start_index = config_string.find("<filter>")
     filter_end_index = config_string.find("</filter>")+ len ("</filter>")
-    rules_string = config_string[filter_start_index:filter_end_index]
-    ##print(rules_string)
     
-    rules_string = rules_string[:filter_start_index] + GenerateFilterString() + rules_string[filter_end_index:]
+    config_string = config_string[:filter_start_index] + GenerateFilterString() + config_string[filter_end_index:]
     
     tempRuleFile = open("TempRules.xml", "w")
-    tempRuleFile.write(rules_string)
+    tempRuleFile.write(config_string)
     tempRuleFile.close()
     
     GetUserAction()
