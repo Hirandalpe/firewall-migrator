@@ -7,7 +7,7 @@ import show_config as sc
 
 class FirewallMigrator:
     
-    def pfsense():
+    def pfsense(self):
         username = input("\nEnter username : ")
         hostname = input("\nEnter hostname / ip address of the firewall : ")
         backup = input("\nEnter name of backup file to export to (without extensions): ")
@@ -22,7 +22,7 @@ class FirewallMigrator:
 
         print('\nConfiguration Recieved')
 
-    def OPNsense():
+    def OPNsense(self):
 
         username = input("\nEnter username : ")
         hostname = input("\nEnter hostname / ip address of the firewall : ")
@@ -38,7 +38,7 @@ class FirewallMigrator:
 
         print('\nConfiguration Recieved')
         
-    def StartScreen():
+    def StartScreen(self):
         print("\n",
         "--------------------------------------------------------------------------\n",
         "--------------------------------------------------------------------------\n",
@@ -64,7 +64,7 @@ class FirewallMigrator:
         "Module Name : Computing Project\n",
         "___________________________________________________________________________")
         
-    def StartMigration():
+    def StartMigration(self):
         print("The following program uses the method of SSH method to access the firewall and do the procedings.\n")
 
         print("\nSelect the firewall to extract rules from : ")
