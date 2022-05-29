@@ -29,6 +29,9 @@ class Rule :
         self.protocol = protocol
         self.description = description
 
+# get the input file name before all the function becuase, we're gonna use it in few places
+file_name = input("Enter the Firewall configuration file name : ")
+
 def AddRule():
     print("\nSelect The Type")
     print("P = Pass")
@@ -120,24 +123,40 @@ def GenerateRuleString(rule):
     
     return ruleString
 
-def ContinueToImport():
-    print("Generating the XML File")
-    # Setting up the Root
+def GenerateFilterString():
+    print("Generating the Filter String")
+    # Set the Filte root
     filterRoot = "<filter>\n"
-    
+
     rulesString = ""
     for r in rules :
         rulesString += GenerateRuleString(r)
-    
-    
     filterRoot += rulesString + "</filter>"
     
-    print(filterRoot);
+    return filterRoot
+
+def ContinueToImport():
+    print("Generating the XML File")
     
     GetUserAction()
 
-def SaveConfiguration():
-    print("yada")
+def SaveConfiguration(file):
+    print("Saving Configuration")
+    configs = open(file_name)
+    config_string = configs.read()
+    configs.close()
+
+    filter_start_index = config_string.find("<filter>")
+    filter_end_index = config_string.find("</filter>")+ len ("</filter>")
+    rules_string = config_string[filter_start_index:filter_end_index]
+    ##print(rules_string)
+    
+    rules_string = rules_string[:filter_start_index] + GenerateFilterString() + rules_string[filter_end_index:]
+    
+    tempRuleFile = open("TempRules.xml", "w")
+    tempRuleFile.write(rules_string)
+    tempRuleFile.close()
+    
     GetUserAction()
 
 def GetUserAction():
@@ -160,7 +179,7 @@ def GetUserAction():
     elif userAction == "4":
         ContinueToImport()
     elif userAction == "5":
-        SaveConfiguration()
+        SaveConfiguration(file_name)
     elif userAction == "6":
         return
     else:
@@ -210,9 +229,9 @@ def filBlanks(val, m):
 
 
 
-file_name = input("Enter the Firewall configuration file name : ")
 configs = open(file_name)
 config_string = configs.read()
+configs.close()
 
 filter_start_index = config_string.find("<filter>")
 filter_end_index = config_string.find("</filter>")+ len ("</filter>")
