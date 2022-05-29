@@ -78,48 +78,48 @@ def DeleteRule():
         
 def GenerateRuleString(rule):
     #setting up the string base
-    ruleString = "\t<rule>\n"
+    ruleString = "\t\t<rule>\n"
     
     # rule type
-    ruleString += "\t\t<type>" + rule.type + "</type>\n"
-    ruleString += "\t\t<ipprotocol>" + rule.ipprotocol + "</ipprotocol>\n"
-    ruleString += "\t\t<descr><![CDATA[" + rule.description + "]]></descr>\n"
-    ruleString += "\t\t<interface>" + "lan" + "</interface>\n"
+    ruleString += "\t\t\t<type>" + rule.type + "</type>\n"
+    ruleString += "\t\t\t<ipprotocol>" + rule.ipprotocol + "</ipprotocol>\n"
+    ruleString += "\t\t\t<descr><![CDATA[" + rule.description + "]]></descr>\n"
+    ruleString += "\t\t\t<interface>" + "lan" + "</interface>\n"
     
     print(rule.protocol)
     
     if rule.protocol != "" and rule.protocol != "-":
-        ruleString += "\t\t<protocol>" + rule.protocol + "</protocol>\n"
+        ruleString += "\t\t\t<protocol>" + rule.protocol + "</protocol>\n"
     
     
-    ruleString += "\t\t<source>\n"
+    ruleString += "\t\t\t<source>\n"
     if rule.source == "lan" or rule.source == "wan":
-        ruleString += "\t\t\t<network>" + rule.source + "</network>\n"
+        ruleString += "\t\t\t\t<network>" + rule.source + "</network>\n"
     elif rule.source == "any":
-        ruleString += "\t\t\t<any></any>\n"     
+        ruleString += "\t\t\t\t<any></any>\n"     
     else :
-        ruleString += "\t\t\t<address>" + rule.source + "</address>\n"
+        ruleString += "\t\t\t\t<address>" + rule.source + "</address>\n"
         
     if rule.sport != "" and rule.sport != "-":
-        ruleString += "\t\t\t<port>" + rule.sport + "</port>\n"
+        ruleString += "\t\t\t\t<port>" + rule.sport + "</port>\n"
         
-    ruleString += "\t\t</source>\n"
+    ruleString += "\t\t\t</source>\n"
     
-    ruleString += "\t\t<destination>\n"
+    ruleString += "\t\t\t<destination>\n"
     if rule.destination == "lan" or rule.destination == "wan":
-        ruleString += "\t\t\t<network>" + rule.destination + "</network>\n"
+        ruleString += "\t\t\t\t<network>" + rule.destination + "</network>\n"
     elif rule.destination == "any":
-        ruleString += "\t\t\t<any></any>\n"        
+        ruleString += "\t\t\t\t<any></any>\n"        
     else :
-        ruleString += "\t\t\t<address>" + rule.destination + "</address>\n"
+        ruleString += "\t\t\t\t<address>" + rule.destination + "</address>\n"
         
     if rule.dport != "" and rule.dport != "-":
-        ruleString += "\t\t\t<port>" + rule.dport + "</port>\n"
+        ruleString += "\t\t\t\t<port>" + rule.dport + "</port>\n"
         
-    ruleString += "\t\t</destination>\n"
+    ruleString += "\t\t\t</destination>\n"
     
     
-    ruleString += "\t</rule>\n"
+    ruleString += "\t\t</rule>\n"
     
     return ruleString
 
@@ -131,7 +131,7 @@ def GenerateFilterString():
     rulesString = ""
     for r in rules :
         rulesString += GenerateRuleString(r)
-    filterRoot += rulesString + "</filter>"
+    filterRoot += rulesString + "\t</filter>"
     
     return filterRoot
 
@@ -150,6 +150,8 @@ def SaveConfiguration(file):
     filter_end_index = config_string.find("</filter>")+ len ("</filter>")
     
     config_string = config_string[:filter_start_index] + GenerateFilterString() + config_string[filter_end_index:]
+    
+    new_fileName = input("Enter the new File Name >> ")
     
     tempRuleFile = open("TempRules.xml", "w")
     tempRuleFile.write(config_string)
