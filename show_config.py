@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import *
 from tksheet import Sheet
 from pathlib import Path
+import Export_rules as er
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -137,7 +138,23 @@ def GenerateFilterString():
 
 def ContinueToImport():
     print("Generating the XML File")
+    print("\nSelect the firewall to extract rules from : ")
+
+    print("\n",
+    "____________________________________\n\n",
+    "          1  -   pfSense\n",
+    "          2  -   OPNsense\n",
+    "____________________________________")
+
+
+    firewall = input("Insert the correct number : ")
     
+    if firewall == "1":
+        er.pfsense()
+
+    elif firewall == "2":
+        er.OPNsense()
+        
     GetUserAction()
 
 def SaveConfiguration(file):
@@ -151,9 +168,9 @@ def SaveConfiguration(file):
     
     config_string = config_string[:filter_start_index] + GenerateFilterString() + config_string[filter_end_index:]
     
-    new_fileName = input("Enter the new File Name >> ")
+    new_fileName = input("Enter the new File Name without Extention >> ")
     
-    tempRuleFile = open("TempRules.xml", "w")
+    tempRuleFile = open(new_fileName + ".xml", "w")
     tempRuleFile.write(config_string)
     tempRuleFile.close()
     
