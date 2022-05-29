@@ -134,16 +134,13 @@ def GenerateFilterString():
     filterRoot += rulesString + "\t</filter>"
     
     return filterRoot
-tt = "qqqqqqq"
+
 def ContinueToImport():
     print("\nSelect the firewall to extract new rules from : ")
-    global tt
-    tt = "efqfqfqef"
     old_rules = GenerateFilterString()
     Sender.StartMigration()
-    configs = open("backup.xml")
-    config_string = configs.read()
-    print(tt)
+    import_data(Sender)
+    new_rules = GenerateFilterString()
     configs.close()
     GetUserAction()
 
