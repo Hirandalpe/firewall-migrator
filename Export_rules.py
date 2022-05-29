@@ -85,8 +85,8 @@ class FirewallMigrator:
             self.OPNsense()
             
     def __init__(self):
-            StartScreen()
-            StartMigration()
+            self.StartScreen()
+            self.StartMigration()
             print("Opening to Show Config")
             sc.import_data(self)
 
