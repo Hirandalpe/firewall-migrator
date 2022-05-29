@@ -31,8 +31,7 @@ class Rule :
         self.description = description
 
 # get the input file name before all the function becuase, we're gonna use it in few places
-file_name = input("Enter the Firewall configuration file name : ")
-
+file_name = ""
 def AddRule():
     print("\nSelect The Type")
     print("P = Pass")
@@ -137,8 +136,7 @@ def GenerateFilterString():
     return filterRoot
 
 def ContinueToImport():
-    print("Generating the XML File")
-    print("\nSelect the firewall to extract rules from : ")
+    print("\nSelect the firewall to extract new rules from : ")
 
     print("\n",
     "____________________________________\n\n",
@@ -203,7 +201,6 @@ def GetUserAction():
         print ("Please Enter a Valid Number")
         GetUserAction()
 
-print("Have A Nice Day!")
 
 class showrules(tk.Tk) : 
    
@@ -245,78 +242,81 @@ def filBlanks(val, m):
     return inputVal
 
 
+def import_data():
+    global file_name
+    file_name = input("Enter the Firewall configuration file name : ")
 
-configs = open(file_name)
-config_string = configs.read()
-configs.close()
+    configs = open(file_name)
+    config_string = configs.read()
+    configs.close()
 
-filter_start_index = config_string.find("<filter>")
-filter_end_index = config_string.find("</filter>")+ len ("</filter>")
-rules_string = config_string[filter_start_index:filter_end_index]
-##print(rules_string)
-   
-mytree = ET.fromstring(rules_string)
-def printDetected(rule_array): 
-    for r in rule_array:
-        print("Rule", r.ipprotocol, r.description)
-  
-def fill_text(text_to_be_checked):
-    return text_to_be_checked
-
+    filter_start_index = config_string.find("<filter>")
+    filter_end_index = config_string.find("</filter>")+ len ("</filter>")
+    rules_string = config_string[filter_start_index:filter_end_index]
+    ##print(rules_string)
     
-myroot = ET.fromstring(rules_string)
-         
+    mytree = ET.fromstring(rules_string)
+    def printDetected(rule_array): 
+        for r in rule_array:
+            print("Rule", r.ipprotocol, r.description)
+    
+    def fill_text(text_to_be_checked):
+        return text_to_be_checked
 
-#printing myroot
-for rule in myroot:
-    #print("--------------------------------")
-    new_rule = Rule("-", "-", "-", "-", "-", "-", "-", "-", "-")
-    for xml_tag in rule:
-        tag = ""
-        text = ""
-        if xml_tag.tag is not None:
-            tag = xml_tag.tag
-            if xml_tag.text is not None:
-                text = xml_tag.text
-            if tag == "type":
-                new_rule.type = fill_text(text)
-            if "ipprotocol" in tag:
-                new_rule.ipprotocol = fill_text(text)
-            if "protocol" == tag:
-                new_rule.protocol = fill_text(text)
-            if "source" in tag:
-                for y in xml_tag:
-                    #print(y)
-                    if "address" in y.tag:
-                        new_rule.source = fill_text(y.text)
-                    if "port" in y.tag:
-                        new_rule.sport = fill_text(y.text)
-                    if "network":
-                        new_rule.source = fill_text(y.text)
-                    if "any" in y.tag:
-                        new_rule.source = "any"
-                        new_rule.sport = "any"
-            if "destination" in tag:
-                for y in xml_tag:
-                    if "address" in y.tag:
-                        new_rule.destination = fill_text(y.text)
-                    if "port" in y.tag:
-                        new_rule.dport = fill_text(y.text)
-                    if "network":
-                        new_rule.destination = fill_text(y.text)
-                    if "any" in y.tag:
-                        new_rule.destination = "any"
-                        new_rule.dport = "any"
-            if "gateway" in tag:
-                new_rule.gateway = fill_text(text)
-            if "descr" in tag:
-                new_rule.description = fill(xml_tag.text)
         
-    rules.append(new_rule)
-    del new_rule
+    myroot = ET.fromstring(rules_string)
+            
 
-#printDetected(rules)
+    #printing myroot
+    for rule in myroot:
+        #print("--------------------------------")
+        new_rule = Rule("-", "-", "-", "-", "-", "-", "-", "-", "-")
+        for xml_tag in rule:
+            tag = ""
+            text = ""
+            if xml_tag.tag is not None:
+                tag = xml_tag.tag
+                if xml_tag.text is not None:
+                    text = xml_tag.text
+                if tag == "type":
+                    new_rule.type = fill_text(text)
+                if "ipprotocol" in tag:
+                    new_rule.ipprotocol = fill_text(text)
+                if "protocol" == tag:
+                    new_rule.protocol = fill_text(text)
+                if "source" in tag:
+                    for y in xml_tag:
+                        #print(y)
+                        if "address" in y.tag:
+                            new_rule.source = fill_text(y.text)
+                        if "port" in y.tag:
+                            new_rule.sport = fill_text(y.text)
+                        if "network":
+                            new_rule.source = fill_text(y.text)
+                        if "any" in y.tag:
+                            new_rule.source = "any"
+                            new_rule.sport = "any"
+                if "destination" in tag:
+                    for y in xml_tag:
+                        if "address" in y.tag:
+                            new_rule.destination = fill_text(y.text)
+                        if "port" in y.tag:
+                            new_rule.dport = fill_text(y.text)
+                        if "network":
+                            new_rule.destination = fill_text(y.text)
+                        if "any" in y.tag:
+                            new_rule.destination = "any"
+                            new_rule.dport = "any"
+                if "gateway" in tag:
+                    new_rule.gateway = fill_text(text)
+                if "descr" in tag:
+                    new_rule.description = fill(xml_tag.text)
+            
+        rules.append(new_rule)
+        del new_rule
 
-app = showrules(rules)
-#app.mainloop()
+    #printDetected(rules)
+
+    app = showrules(rules)
+    #app.mainloop()
 
