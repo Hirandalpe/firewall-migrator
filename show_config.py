@@ -243,7 +243,7 @@ def import_data(sender):
     config_string = configs.read()
     configs.close()
     
-    tempBackup = open("ImportedBackup.xml")
+    tempBackup = open("ImportedBackup.xml", "w")
     tempBackup.write(config_string)
     tempBackup.close()
     
