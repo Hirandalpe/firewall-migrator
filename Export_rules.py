@@ -3,6 +3,7 @@ from unittest import result
 import os
 import pty
 import time
+import show_config as sc
 
 def pfsense():
 
@@ -36,7 +37,7 @@ def OPNsense():
 
     print('\nConfiguration Recieved')
     
-def StartMigration():
+def StartScreen():
     print("\n",
     "--------------------------------------------------------------------------\n",
     "--------------------------------------------------------------------------\n",
@@ -61,7 +62,8 @@ def StartMigration():
     "Module Code : PRCO303SL\n",
     "Module Name : Computing Project\n",
     "___________________________________________________________________________")
-
+    
+def StartMigration():
     print("The following program uses the method of SSH method to access the firewall and do the procedings.\n")
 
     print("\nSelect the firewall to extract rules from : ")
@@ -80,4 +82,10 @@ def StartMigration():
 
     elif firewall == "2":
         OPNsense()
+
+StartScreen()
+StartMigration()
+print("Opening to Show Config")
+sc.import_data(self)
+    
 

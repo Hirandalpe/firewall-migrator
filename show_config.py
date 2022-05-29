@@ -8,12 +8,12 @@ import tkinter as tk
 from tkinter import *
 from tksheet import Sheet
 from pathlib import Path
-import Export_rules as er
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
 rules = []
+Sender = any
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -137,22 +137,7 @@ def GenerateFilterString():
 
 def ContinueToImport():
     print("\nSelect the firewall to extract new rules from : ")
-
-    print("\n",
-    "____________________________________\n\n",
-    "          1  -   pfSense\n",
-    "          2  -   OPNsense\n",
-    "____________________________________")
-
-
-    firewall = input("Insert the correct number : ")
-    
-    if firewall == "1":
-        er.pfsense()
-
-    elif firewall == "2":
-        er.OPNsense()
-        
+    sender.StartMigration()
     GetUserAction()
 
 def SaveConfiguration(file):
@@ -181,7 +166,7 @@ def GetUserAction():
     print("(3) Delete rule")
     print("(4) Continue to import")
     print("(5) Save Configurations")
-    print("(6) Exit")
+    print("(6) Exit to Main Console")
     print("::::::::::::::::::::::::::::::::::::::")
     userAction = input("Action (Enter The Number) >> ")
 
@@ -242,7 +227,9 @@ def filBlanks(val, m):
     return inputVal
 
 
-def import_data():
+def import_data(sender):
+    global Sender
+    Sender = sender
     global file_name
     file_name = input("Enter the Firewall configuration file name : ")
 
