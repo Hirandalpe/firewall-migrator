@@ -31,7 +31,7 @@ print("\n",
 
 print("The following program uses the method of SSH method to access the firewall and do the procedings.\n")
 
-print("\nSelect the firewall to extrct rules from : ")
+print("\nSelect the firewall to extract rules from : ")
 
 print("\n",
 "____________________________________\n\n",
@@ -74,9 +74,9 @@ def OPNsense():
 
     print('\nConfiguration Recieved')
 
-if firewall == 1:
+if firewall == "1":
     pfsense()
 
-elif firewall == 2:
+elif firewall == "2":
     OPNsense()
 
