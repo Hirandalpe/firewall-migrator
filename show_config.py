@@ -250,7 +250,7 @@ def import_data(sender):
     filter_start_index = config_string.find("<filter>")
     filter_end_index = config_string.find("</filter>")+ len ("</filter>")
     rules_string = config_string[filter_start_index:filter_end_index]
-    print(rules_string)
+    #print(rules_string)
     
     mytree = ET.fromstring(rules_string)
     def printDetected(rule_array): 
