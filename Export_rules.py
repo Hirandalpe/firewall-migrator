@@ -87,5 +87,7 @@ class FirewallMigrator:
 
         elif firewall == "2":
             self.OPNsense()
-    
 
+
+if __name__ == "__main__":
+    FirewallMigrator()
