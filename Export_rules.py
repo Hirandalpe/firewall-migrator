@@ -7,7 +7,6 @@ import show_config as sc
 
 class FirewallMigrator:
     def pfsense():
-
         username = input("\nEnter username : ")
         hostname = input("\nEnter hostname / ip address of the firewall : ")
         backup = input("\nEnter name of backup file to export to (without extensions): ")
@@ -79,14 +78,15 @@ class FirewallMigrator:
         firewall = input("Insert the correct number : ")
 
         if firewall == "1":
-            pfsense()
+            self.pfsense()
 
         elif firewall == "2":
-            OPNsense()
+            self.OPNsense()
 
-    StartScreen()
-    StartMigration()
-    print("Opening to Show Config")
-    sc.import_data(self)
+        def __init__(self):
+            StartScreen()
+            StartMigration()
+            print("Opening to Show Config")
+            sc.import_data(self)
     
 
