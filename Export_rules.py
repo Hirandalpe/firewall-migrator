@@ -6,11 +6,7 @@ import time
 import show_config as sc
 
 class FirewallMigrator:
-    def __init__(self):
-            StartScreen()
-            StartMigration()
-            print("Opening to Show Config")
-            sc.import_data(self)
+    
     def pfsense():
         username = input("\nEnter username : ")
         hostname = input("\nEnter hostname / ip address of the firewall : ")
@@ -87,6 +83,12 @@ class FirewallMigrator:
 
         elif firewall == "2":
             self.OPNsense()
+            
+    def __init__(self):
+            StartScreen()
+            StartMigration()
+            print("Opening to Show Config")
+            sc.import_data(self)
 
 
 if __name__ == "__main__":
