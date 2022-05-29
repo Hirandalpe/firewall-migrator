@@ -138,11 +138,12 @@ def GenerateFilterString():
 def ContinueToImport():
     print("\nSelect the firewall to extract new rules from : ")
     Sender.StartMigration()
+    import_data(Sender)
     GetUserAction()
 
 def SaveConfiguration(file):
     print("Saving Configuration")
-    configs = open(file_name)
+    configs = open(file)
     config_string = configs.read()
     configs.close()
 
