@@ -10,7 +10,7 @@ class FirewallMigrator:
     def pfsense(self):
         username = input("\nEnter username : ")
         hostname = input("\nEnter hostname / ip address of the firewall : ")
-        backup = input("\nEnter name of backup file to export to (without extensions): ")
+        backup = "backup"
         print ("\nYour selections are : \n",
         "\nUsername : "+username+
         "\nHostname/IP : "+hostname)
@@ -26,7 +26,7 @@ class FirewallMigrator:
 
         username = input("\nEnter username : ")
         hostname = input("\nEnter hostname / ip address of the firewall : ")
-        backup = input("\nEnter name of backup file to export to (without extensions): ")
+        backup = "backup"
         print ("\nYour selections are : \n",
         "\nUsername : "+username+
         "\nHostname/IP : "+hostname)

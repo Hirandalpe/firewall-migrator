@@ -31,7 +31,7 @@ class Rule :
         self.description = description
 
 # get the input file name before all the function becuase, we're gonna use it in few places
-file_name = ""
+file_name = "backup.xml"
 def AddRule():
     print("\nSelect The Type")
     print("P = Pass")
@@ -134,11 +134,17 @@ def GenerateFilterString():
     filterRoot += rulesString + "\t</filter>"
     
     return filterRoot
-
+tt = "qqqqqqq"
 def ContinueToImport():
     print("\nSelect the firewall to extract new rules from : ")
+    global tt
+    tt = "efqfqfqef"
+    old_rules = GenerateFilterString()
     Sender.StartMigration()
-    import_data(Sender)
+    configs = open(file)
+    config_string = configs.read()
+    print(tt)
+    configs.close()
     GetUserAction()
 
 def SaveConfiguration(file):
@@ -188,7 +194,7 @@ def GetUserAction():
         GetUserAction()
 
 
-class showrules(tk.Tk) : 
+class showrules() : 
    
     def __init__(self, data) :
         print("------------------------------------------------------------------------------------------------------------------------------------------------")
@@ -232,12 +238,15 @@ def import_data(sender):
     global Sender
     Sender = sender
     global file_name
-    file_name = input("Enter the Firewall configuration file name : ")
 
     configs = open(file_name)
     config_string = configs.read()
     configs.close()
-
+    
+    tempBackup = open("ImportedBackup.xml")
+    tempBackup.write(config_string)
+    tempBackup.close()
+    
     filter_start_index = config_string.find("<filter>")
     filter_end_index = config_string.find("</filter>")+ len ("</filter>")
     rules_string = config_string[filter_start_index:filter_end_index]
