@@ -137,7 +137,7 @@ def GenerateFilterString():
 
 def ContinueToImport():
     print("\nSelect the firewall to extract new rules from : ")
-    sender.StartMigration()
+    Sender.StartMigration()
     GetUserAction()
 
 def SaveConfiguration(file):
