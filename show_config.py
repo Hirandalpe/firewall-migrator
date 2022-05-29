@@ -141,7 +141,7 @@ def ContinueToImport():
     tt = "efqfqfqef"
     old_rules = GenerateFilterString()
     Sender.StartMigration()
-    configs = open(file)
+    configs = open("backup.xml")
     config_string = configs.read()
     print(tt)
     configs.close()
