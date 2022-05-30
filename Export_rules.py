@@ -74,9 +74,9 @@ def OPNsense():
 
     print('\nConfiguration Recieved')
 
-if firewall == 1:
+if firewall == "1":
     pfsense()
 
-elif firewall == 2:
+elif firewall == "2":
     OPNsense()
 
