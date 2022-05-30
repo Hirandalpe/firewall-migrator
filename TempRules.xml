@@ -1,0 +1,127 @@
+<filter>
+		<rule>
+			<type>pass</type>
+			<ipprotocol>inet</ipprotocol>
+			<descr><![CDATA[Default allow LAN to any rule]]></descr>
+			<interface>lan</interface>
+			<tracker>0100000101</tracker>
+			<source>
+				<network>lan</network>
+			</source>
+			<destination>
+				<any></any>
+			</destination>
+		</rule>
+		<rule>
+			<type>pass</type>
+			<ipprotocol>inet6</ipprotocol>
+			<descr><![CDATA[Default allow LAN IPv6 to any rule]]></descr>
+			<interface>lan</interface>
+			<tracker>0100000102</tracker>
+			<source>
+				<network>lan</network>
+			</source>
+			<destination>
+				<any></any>
+			</destination>
+		</rule>
+		<rule>
+			<type>pass</type>
+			<interface>lan</interface>
+			<ipprotocol>inet</ipprotocol>
+			<tag></tag>
+			<tagged></tagged>
+			<max></max>
+			<max-src-nodes></max-src-nodes>
+			<max-src-conn></max-src-conn>
+			<max-src-states></max-src-states>
+			<statetimeout></statetimeout>
+			<statetype><![CDATA[keep state]]></statetype>
+			<os></os>
+			<protocol>tcp</protocol>
+			<source>
+				<address>192.168.5.0/30</address>
+			</source>
+			<destination>
+				<network>(self)</network>
+				<port>80</port>
+			</destination>
+			<log></log>
+			<descr><![CDATA[123]]></descr>
+			<updated>
+				<time>1652786435</time>
+				<username><![CDATA[admin@192.168.1.100 (Local Database)]]></username>
+			</updated>
+			<created>
+				<time>1652786435</time>
+				<username><![CDATA[admin@192.168.1.100 (Local Database)]]></username>
+			</created>
+		</rule>
+		<rule>
+			<type>pass</type>
+			<ipprotocol>inet6</ipprotocol>
+			<descr><![CDATA[Default allow LAN IPv6 to any rule]]></descr>
+			<interface>lan</interface>
+			<tracker>0100000102</tracker>
+			<source>
+				<network>lan</network>
+			</source>
+			<destination>
+				<any></any>
+			</destination>
+		</rule>
+	</filter><filter>
+	<rule>
+		<type>pass</type>
+		<ipprotocol>inet</ipprotocol>
+		<descr><![CDATA[Default allow LAN to any rule]]></descr>
+		<interface>lan</interface>
+		<source>
+			<network>lan</network>
+		</source>
+		<destination>
+			<any></any>
+			<port>any</port>
+		</destination>
+	</rule>
+	<rule>
+		<type>pass</type>
+		<ipprotocol>inet6</ipprotocol>
+		<descr><![CDATA[Default allow LAN IPv6 to any rule]]></descr>
+		<interface>lan</interface>
+		<source>
+			<network>lan</network>
+		</source>
+		<destination>
+			<any></any>
+			<port>any</port>
+		</destination>
+	</rule>
+	<rule>
+		<type>pass</type>
+		<ipprotocol>inet</ipprotocol>
+		<descr><![CDATA[123]]></descr>
+		<interface>lan</interface>
+		<protocol>tcp</protocol>
+		<source>
+			<address>192.168.5.0/30</address>
+		</source>
+		<destination>
+			<address>80</address>
+			<port>80</port>
+		</destination>
+	</rule>
+	<rule>
+		<type>pass</type>
+		<ipprotocol>inet6</ipprotocol>
+		<descr><![CDATA[Default allow LAN IPv6 to any rule]]></descr>
+		<interface>lan</interface>
+		<source>
+			<network>lan</network>
+		</source>
+		<destination>
+			<any></any>
+			<port>any</port>
+		</destination>
+	</rule>
+</filter>
